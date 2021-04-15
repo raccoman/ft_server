@@ -8,7 +8,9 @@ RUN apt-get -y install mariadb-server
 
 COPY ./srcs/setup.sh ./
 COPY ./srcs/nginx-conf ./tmp/nginx-conf
+COPY ./srcs/nginx-conf-autoindex-off ./tmp/nginx-conf-autoindex-off
 COPY ./srcs/phpmyadmin.inc.php ./tmp/phpmyadmin.inc.php
 COPY ./srcs/wp-config.php ./tmp/wp-config.php
+COPY ./srcs/autoindex.sh ./home/autoindex.sh
 
 CMD bash setup.sh

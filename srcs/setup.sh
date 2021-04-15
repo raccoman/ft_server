@@ -10,10 +10,10 @@ echo "<?php phpinfo(); ?>" >> /var/www/raccoman/index.php
 
 # SSL
 mkdir /etc/nginx/ssl
-openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/raccoman.pem -keyout /etc/nginx/ssl/raccoman.key
+openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/raccoman.pem -keyout /etc/nginx/ssl/raccoman.key -subj "/C=IT/ST=Rome/L=Rome/O=42 School/OU=raccoman/CN=raccoman/"
 
 # Config NGINX
-mv ./tmp/nginx-conf /etc/nginx/sites-available/raccoman
+cp ./tmp/nginx-conf /etc/nginx/sites-available/raccoman
 ln -s /etc/nginx/sites-available/raccoman /etc/nginx/sites-enabled/raccoman
 rm -rf /etc/nginx/sites-enabled/default
 
@@ -35,6 +35,9 @@ wget -c https://wordpress.org/latest.tar.gz
 tar -xvzf latest.tar.gz
 mv wordpress/ /var/www/raccoman
 mv /tmp/wp-config.php /var/www/raccoman/wordpress
+
+# Change to home directory
+cd /home/
 
 service php7.3-fpm start
 service nginx start
